@@ -1,0 +1,397 @@
+.news-form {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  font-family: "Inter", sans-serif;
+}
+
+.news-form h2 {
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.form-section {
+  margin-bottom: 30px;
+}
+
+.form-section h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #1f2937;
+}
+
+.news-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.news-form input,
+.news-form textarea,
+.news-form select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  margin-bottom: 14px;
+  transition: all 0.2s ease;
+}
+
+.news-form input:focus,
+.news-form textarea:focus,
+.news-form select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.news-form input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(37,99,235,0.3);
+}
+
+
+
+
+
+
+
+
+.news-form {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+  max-width: 1000px;
+  margin: auto;
+  font-family: "Inter", sans-serif;
+}
+
+.news-form h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #111;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.news-form input,
+.news-form textarea,
+.news-form select {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+  color: #111;
+}
+
+.news-form input:focus,
+.news-form textarea:focus,
+.news-form select:focus {
+  border-color: #2563eb;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.checkbox-grid label {
+  font-size: 14px;
+  color: #333;
+}
+
+.primary-btn {
+  margin-top: 20px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background: #1e40af;
+}
+
+
+
+
+
+
+
+/* =====================================================
+   GLOBAL ADMIN FORM BASE
+   ===================================================== */
+.news-form {
+  max-width: 1100px;
+  margin: 40px auto 80px;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 18px;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #111;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+}
+
+.news-form h2 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  letter-spacing: -0.4px;
+}
+
+/* =====================================================
+   FORM GROUPS
+   ===================================================== */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 14px 14px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  transition: all 0.25s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  background: #fff;
+  border-color: #111;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+}
+
+/* =====================================================
+   CONTENT BLOCKS
+   ===================================================== */
+.block {
+  margin-bottom: 18px;
+  padding: 18px;
+  background: #fafafa;
+  border-radius: 14px;
+  border: 1px solid #eee;
+  display: grid;
+  gap: 12px;
+}
+
+.block select {
+  font-weight: 600;
+}
+
+.block button {
+  align-self: flex-start;
+  background: #ffecec;
+  color: #b00000;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.block button:hover {
+  background: #b00000;
+  color: #fff;
+}
+
+/* Add content buttons */
+.news-form > button:not(.primary-btn) {
+  margin-right: 10px;
+  margin-bottom: 18px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+
+.news-form > button:not(.primary-btn):hover {
+  background: #111;
+  color: #fff;
+}
+
+/* =====================================================
+   AFFILIATE PANEL
+   ===================================================== */
+.news-form h3 {
+  margin: 30px 0 16px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.news-form h3 + div > div {
+  padding: 16px;
+  border-radius: 14px;
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  margin-bottom: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.news-form h3 + div input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.news-form span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b4eff;
+}
+
+/* =====================================================
+   CHECKBOX GRID
+   ===================================================== */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 30px 0;
+}
+
+.checkbox-grid label {
+  font-size: 13px;
+  font-weight: 600;
+  background: #fafafa;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* =====================================================
+   SEO PANEL
+   ===================================================== */
+.seo-panel {
+  margin-top: 30px;
+  padding: 22px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f9fafc, #ffffff);
+  border: 1px solid #eee;
+}
+
+.seo-panel h3 {
+  margin-bottom: 14px;
+}
+
+.seo-panel input,
+.seo-panel textarea {
+  background: #f1f1f1;
+  cursor: not-allowed;
+}
+
+.seo-panel p {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.seo-panel p:first-of-type {
+  font-weight: 700;
+}
+
+.seo-panel p:last-child {
+  color: #b45309;
+}
+
+/* =====================================================
+   PRIMARY BUTTON
+   ===================================================== */
+.primary-btn {
+  margin-top: 30px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 800;
+  background: #111;
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 768px) {
+  .news-form {
+    padding: 22px;
+  }
+}

@@ -1,0 +1,43 @@
+.admin-header {
+  height: 60px;
+  background: #1f2937;
+  color: #fff;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.admin-left h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.admin-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-name {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.logout-btn {
+  background: #ef4444;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}

@@ -1,0 +1,87 @@
+/* ================================
+   ADMIN GLOBAL THEME FIX
+   ================================ */
+
+/* Reset only admin area */
+.admin-layout,
+.admin-layout * {
+  box-sizing: border-box;
+}
+
+/* TEXT FIX */
+.admin-layout {
+  background: #f5f7fb;
+  color: #111 !important;
+  font-family: "Inter", sans-serif;
+}
+
+/* BUTTON FIX (MOST IMPORTANT) */
+.admin-layout button {
+  background: #2563eb;
+  color: #ffffff !important;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-layout button:hover {
+  background: #1e40af;
+}
+
+/* INPUT / TEXTAREA / SELECT */
+.admin-layout input,
+.admin-layout textarea,
+.admin-layout select {
+  background: #ffffff !important;
+  color: #111 !important;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+/* PLACEHOLDER */
+.admin-layout input::placeholder,
+.admin-layout textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* LABEL */
+.admin-layout label {
+  color: #374151;
+  font-size: 13px;
+}
+
+/* TABLE FIX */
+.admin-layout table {
+  background: #ffffff;
+  color: #111;
+}
+
+.admin-layout th {
+  background: #f1f5f9;
+  color: #111;
+}
+
+.admin-layout td {
+  color: #111;
+}
+
+/* LINK FIX */
+.admin-layout a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.admin-layout a:hover {
+  text-decoration: underline;
+}
+
+/* CHECKBOX / RADIO */
+.admin-layout input[type="checkbox"],
+.admin-layout input[type="radio"] {
+  accent-color: #2563eb;
+}
