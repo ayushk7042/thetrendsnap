@@ -66,7 +66,7 @@ const CategoryNews = () => {
     getNews().then(res => {
       const all = res.data || [];
       setCategoryNews(all.filter(n => n.category?.slug === slug));
-      setLatest(all.slice(0, 10));
+      setLatest(all.slice(0, 30));
     });
   }, [slug]);
 

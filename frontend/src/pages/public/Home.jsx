@@ -77,38 +77,6 @@ useEffect(() => {
 
      
 
-{/* {hero && (
-  <section className="hero">
-    <div className="hero-img-wrap">
-      <img src={getImageUrl(hero)} alt={hero.title} />
-    </div>
-
-    <div className="hero-info">
-      <span className="hero-tag">Trending</span>
-
-      <h1 className="hero-title">{hero.title}</h1>
-
-      <p className="hero-desc">{hero.excerpt}</p>
-
-      <Link to={`/news/${hero.slug}`} className="hero-read">
-        Read full story →
-      </Link>
-    </div>
-  </section>
-)}
-
-      
-      <section className="sub-trending">
-        {homepage.subTrending?.map(n => (
-          <Link to={`/news/${n.slug}`} key={n._id} className="sub-card">
-            <img src={getImageUrl(n)} />
-            <div>
-              <h4>{n.title}</h4>
-              <span>{n.category?.name}</span>
-            </div>
-          </Link>
-        ))}
-      </section> */}
 
 {hero && (
   <section className="hero-layout">
@@ -167,7 +135,7 @@ useEffect(() => {
     <h3>Editor’s Picks</h3>
 
     <div className="pick-row">
-      {(homepage.editorPicks || latestNews.slice(0,6)).map((n, i) => (
+      {(homepage.editorPicks || latestNews.slice(0,30)).map((n, i) => (
         <Link to={`/news/${n.slug}`} key={i} className="pick-card">
           <img src={getImageUrl(n)} />
           <p>{n.title}</p>

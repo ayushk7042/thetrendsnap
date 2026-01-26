@@ -202,7 +202,7 @@ useEffect(() => {
       // 3️⃣ Latest news (sidebar)
       const latest = allNews
         .filter(n => n.slug !== slug)
-        .slice(0, 10);
+        .slice(0, 15);
       setLatestNews(latest);
 
       // 4️⃣ Related posts (same category)

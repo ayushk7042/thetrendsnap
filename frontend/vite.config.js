@@ -1,19 +1,16 @@
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react'
 
-// // https://vite.dev/config/
+
+// import { defineConfig } from "vite";
+// import react from "@vitejs/plugin-react";
+
 // export default defineConfig({
-//   plugins: [
-//     react({
-//       babel: {
-//         plugins: [['babel-plugin-react-compiler']],
-//       },
-//     }),
-//   ],
-// })
+//   plugins: [react()],
+// });
+
+
 
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react-swc";
 
 export default defineConfig({
   plugins: [react()],
