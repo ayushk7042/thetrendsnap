@@ -100,6 +100,7 @@ import AllNews from "./pages/public/AllNews";
 import Trending from "./pages/public/Trending";
 import About from "./pages/public/About";
 import PrivacyPolicy from "./pages/public/PrivacyPolicy";
+import Categories from "./pages/public/Categories";
 
 
 const App = () => {
@@ -108,6 +109,7 @@ const App = () => {
       {/* ================= PUBLIC ROUTES ================= */}
       <Route path="/" element={<Home />} />
       <Route path="/news/:slug" element={<NewsDetail />} />
+      <Route path="/category" element={<Categories />} />
       <Route path="/category/:slug" element={<CategoryNews />} />
       <Route path="/contact" element={<Contact />} />
 

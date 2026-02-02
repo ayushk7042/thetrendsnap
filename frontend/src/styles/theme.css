@@ -1,0 +1,27 @@
+/* Global theme variables for TrendSnap */
+:root {
+  --primary-grad-start: #667eea;
+  --primary-grad-end: #764ba2;
+  --accent: #ff6b6b;
+  --muted: #6b7280;
+  --text-dark: #0f172a;
+  --card-radius: 12px;
+  --card-shadow: 0 16px 48px rgba(15,23,42,0.08);
+  --glass-bg: rgba(255,255,255,0.85);
+}
+
+/* Utility helpers */
+.brand-gradient {
+  background: linear-gradient(90deg, var(--primary-grad-start), var(--primary-grad-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--primary-grad-start), var(--primary-grad-end));
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+}

@@ -44,16 +44,28 @@ exports.updateHomepage = async (req, res) => {
   try {
     const data = req.body;
 
-    // 🔒 SAFETY: limit enforcement
+    // 🔒 SAFETY: Clean and validate data before saving
+    if (data.mainTrending && data.mainTrending.length === 0) {
+      delete data.mainTrending;
+    }
+
     if (data.subTrending?.length > 5) {
       data.subTrending = data.subTrending.slice(0, 5);
     }
 
     if (Array.isArray(data.categorySections)) {
-      data.categorySections = data.categorySections.map(sec => ({
-        ...sec,
-        subTrending: sec.subTrending?.slice(0, 5) || []
-      }));
+      data.categorySections = data.categorySections
+        .filter(sec => sec && sec.category) // Remove invalid sections
+        .map(sec => {
+          const cleaned = {
+            category: sec.category,
+            trending: sec.trending || null,
+            subTrending: Array.isArray(sec.subTrending) 
+              ? sec.subTrending.slice(0, 5) 
+              : []
+          };
+          return cleaned;
+        });
     }
 
     let homepage = await Homepage.findOne();
@@ -61,13 +73,23 @@ exports.updateHomepage = async (req, res) => {
     if (!homepage) {
       homepage = await Homepage.create(data);
     } else {
-      Object.assign(homepage, data);
+      // Clear old data and set new
+      homepage.mainTrending = data.mainTrending || null;
+      homepage.subTrending = data.subTrending || [];
+      homepage.categorySections = data.categorySections || [];
+      homepage.customHomeBlocks = data.customHomeBlocks || [];
+      
       await homepage.save();
     }
+
+    // Populate before responding
+    await homepage.populate(
+      "mainTrending subTrending categorySections.category categorySections.trending categorySections.subTrending"
+    );
 
     res.json(homepage);
   } catch (err) {
     console.error("Update homepage error:", err);
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err.message, error: err.toString() });
   }
 };

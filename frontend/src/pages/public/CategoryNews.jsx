@@ -1,46 +1,3 @@
-// import { useParams } from "react-router-dom";
-// import { useEffect, useState } from "react";
-// import { getNews } from "../../api/news.api";
-// import Header from "../../components/public/Header";
-// import NewsCard from "../../components/public/NewsCard";
-
-// const CategoryNews = () => {
-//   const { slug } = useParams();
-//   const [news, setNews] = useState([]);
-
-//   useEffect(() => {
-//     getNews().then((res) => {
-//       const filtered = res.data.filter(
-//         (n) => n.category?.slug === slug
-//       );
-//       setNews(filtered);
-//     });
-//   }, [slug]);
-
-//   return (
-//     <>
-//       <Header />
-
-//       <h2 className="category-title">
-//         {slug.toUpperCase()}
-//       </h2>
-
-//       <section className="news-grid">
-//         {news.length > 0 ? (
-//           news.map((n) => (
-//             <NewsCard key={n._id} news={n} />
-//           ))
-//         ) : (
-//           <p>No news found</p>
-//         )}
-//       </section>
-//     </>
-//   );
-// };
-
-// export default CategoryNews;
-
-
 
 
 import { useParams, Link } from "react-router-dom";
@@ -57,6 +14,9 @@ const getImageUrl = (news) => {
   return `http://localhost:5000${news.featuredImage.url}`;
 };
 
+const readingTime = (text = "") =>
+  Math.max(1, Math.ceil((text?.split(" ") || []).length / 200));
+
 const CategoryNews = () => {
   const { slug } = useParams();
   const [categoryNews, setCategoryNews] = useState([]);
@@ -65,76 +25,115 @@ const CategoryNews = () => {
   useEffect(() => {
     getNews().then(res => {
       const all = res.data || [];
-      setCategoryNews(all.filter(n => n.category?.slug === slug));
-      setLatest(all.slice(0, 30));
+      const filtered = all.filter(n => n.category?.slug === slug);
+      setCategoryNews(filtered);
+      setLatest(all.slice(0, 15));
     });
   }, [slug]);
+
+  const featured = categoryNews[0];
+  const remaining = categoryNews.slice(1);
 
   return (
     <>
       <Header />
 
-      {/* ===== LIGHT HERO ===== */}
-      {/* <section className="cat-hero">
-        <h1>{slug.replace("-", " ")}</h1>
-        <p>Latest and trusted news from this category</p>
-      </section> */}
+      {/* PREMIUM HERO */}
+      <section className="category-hero reveal">
+        <div className="hero-content">
+          <div className="hero-breadcrumb">
+            <Link to="/">Home</Link> / <span>{slug.replace(/-/g, " ").toUpperCase()}</span>
+          </div>
+          <h1 className="hero-title">{slug.replace(/-/g, " ")}</h1>
+          <p className="hero-subtitle">Explore {categoryNews.length} articles in this category</p>
+        </div>
+      </section>
 
-      <section className="cat-hero">
-  <div className="cat-hero-inner">
-    <h1>{slug.replace("-", " ")}</h1>
-    <p>Latest and trusted news from this category</p>
-  </div>
-</section>
+      {/* FEATURED ARTICLE */}
+      {featured && (
+        <section className="featured-section reveal">
+          <Link to={`/news/${featured.slug}`} className="featured-card">
+            <div className="featured-image">
+              <img src={getImageUrl(featured)} alt={featured.title} />
+              <div className="featured-overlay"></div>
+            </div>
+            <div className="featured-content">
+              <div className="featured-badge">Featured</div>
+              <h2>{featured.title}</h2>
+              <p>{featured.excerpt}</p>
+              <div className="featured-meta">
+                <span>⏱ {readingTime(featured.content)} min read</span>
+                <span className="featured-cat">{featured.category?.name}</span>
+              </div>
+            </div>
+          </Link>
+        </section>
+      )}
 
-
-      {/* ===== MAIN LAYOUT ===== */}
-      <section className="cat-layout">
-
-        {/* LEFT – NEWS LIST */}
-        <div className="cat-list">
-          {categoryNews.length > 0 ? (
-            categoryNews.map(n => (
-              <Link
-                to={`/news/${n.slug}`}
-                key={n._id}
-                className="news-row"
-              >
-                <img src={getImageUrl(n)} alt={n.title} />
-
-                <div className="news-row-content">
-                  <span className="news-cat">
-                    {n.category?.name}
-                  </span>
-
-                  <h3>{n.title}</h3>
-
-                  <p>{n.excerpt}</p>
-                </div>
-              </Link>
-            ))
+      {/* MAIN LAYOUT */}
+      <section className="category-layout reveal">
+        {/* LEFT: News Grid */}
+        <div className="news-main">
+          <h3 className="section-title">Latest Articles</h3>
+          {remaining.length > 0 ? (
+            <div className="news-grid">
+              {remaining.map(n => (
+                <Link
+                  to={`/news/${n.slug}`}
+                  key={n._id}
+                  className="news-card"
+                >
+                  <div className="news-image">
+                    <img src={getImageUrl(n)} alt={n.title} />
+                  </div>
+                  <div className="news-content">
+                    <span className="news-badge">{n.category?.name}</span>
+                    <h3>{n.title}</h3>
+                    <p>{n.excerpt}</p>
+                    <div className="news-footer">
+                      <span className="read-time">⏱ {readingTime(n.content)} min</span>
+                      <span className="read-more">Read →</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           ) : (
-            <p className="empty">No news found</p>
+            <div className="empty-state">
+              <p>No articles found in this category</p>
+            </div>
           )}
         </div>
 
-        {/* RIGHT – SIDEBAR */}
-        <aside className="cat-sidebar">
-          <h4>New Posts</h4>
+        {/* RIGHT: Sidebar */}
+        <aside className="category-sidebar">
+          <div className="sidebar-card">
+            <h4 className="sidebar-title">Recent Posts</h4>
+            <div className="sidebar-list">
+              {latest.map((n, idx) => (
+                <Link
+                  to={`/news/${n.slug}`}
+                  key={n._id}
+                  className="sidebar-item"
+                >
+                  <div className="sidebar-index">{idx + 1}</div>
+                  <div className="sidebar-content">
+                    <div className="sidebar-title-text">{n.title}</div>
+                    <div className="sidebar-cat">{n.category?.name}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
 
-          {latest.map(n => (
-            <Link
-              to={`/news/${n.slug}`}
-              key={n._id}
-              className="side-item"
-            >
-              <img src={getImageUrl(n)} />
-              <p>{n.title}</p>
-            </Link>
-          ))}
+          <div className="sidebar-card sidebar-cta">
+            <h4>Trending Now</h4>
+            <p>Stay updated with the latest news and insights</p>
+            <Link to="/category" className="sidebar-btn">Browse All Categories</Link>
+          </div>
         </aside>
-
       </section>
+
       <Footer />
     </>
   );

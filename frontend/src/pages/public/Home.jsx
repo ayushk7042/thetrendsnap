@@ -41,72 +41,86 @@ const Home = () => {
     load();
   }, []);
 
+  useEffect(() => {
+    const els = document.querySelectorAll(".reveal");
+    els.forEach(el => el.classList.add("pending"));
 
-useEffect(() => {
-  const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add("show");
+            e.target.classList.remove("pending");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
 
-  els.forEach(el => el.classList.add("pending"));
+    els.forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, []);
 
-  const io = new IntersectionObserver(
-    entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add("show");
-          e.target.classList.remove("pending");
-        }
-      });
-    },
-    { threshold: 0.15 }
+  if (loading) return (
+    <div className="loader-container">
+      <div className="premium-loader">
+        <div className="loader-spinner"></div>
+        <p>Loading Premium News…</p>
+      </div>
+    </div>
   );
-
-  els.forEach(el => io.observe(el));
-  return () => io.disconnect();
-}, []);
-
-
-
-
-  if (loading) return <div className="loader">Loading Premium News…</div>;
   if (!homepage) return null;
 
   const hero = homepage.mainTrending;
 
   return (
-    <>
+    <div className="home-wrapper">
       <Header />
 
-     
+      {/* ULTRA PREMIUM HERO SECTION */}
+      {hero && (
+        <section className="hero-premium reveal">
+          <div className="hero-main-grid">
+            {/* LEFT: Featured Article Card */}
+            <div className="hero-card-left">
+              <div className="hero-badge">{hero.category?.name || "TRENDING"}</div>
+              <h1 className="hero-headline">{hero.title}</h1>
+              <p className="hero-desc">{hero.excerpt}</p>
+              <div className="hero-meta">
+                <span>⏱ {readingTime(hero.content)} min read</span>
+                <span>Published Today</span>
+              </div>
+              <div className="hero-btns">
+                <Link to={`/news/${hero.slug}`} className="btn-cta">Read Article</Link>
+                <Link to={`/category/${hero.category?.slug || ""}`} className="btn-outline">View Category</Link>
+              </div>
+            </div>
 
-
-{hero && (
-  <section className="hero-layout">
-    {/* MAIN TRENDING */}
-    <Link to={`/news/${hero.slug}`} className="hero-main">
-      <img src={getImageUrl(hero)} alt={hero.title} />
-      <div className="hero-overlay">
-
-
-
-        <span className="hero-badge">🔥 Trending</span>
-        <h1>{hero.title}</h1>
-        <p>{hero.excerpt}</p>
-      </div>
-    </Link>
-
-    {/* SUB TRENDING */}
-    <div className="hero-side">
-      {homepage.subTrending?.slice(0, 5).map(n => (
-        <Link to={`/news/${n.slug}`} key={n._id} className="side-card">
-          <img src={getImageUrl(n)} />
-          <div>
-            <span>{n.category?.name}</span>
-            <h4>{n.title}</h4>
+            {/* RIGHT: Featured Image */}
+            <div className="hero-image-main">
+              <img src={getImageUrl(hero)} alt={hero.title} />
+            </div>
           </div>
-        </Link>
-      ))}
-    </div>
-  </section>
-)}
+
+          {/* TRENDING ITEMS BELOW */}
+          <div className="hero-trending-row">
+            {homepage.subTrending?.slice(0, 4).map((n) => (
+              <Link key={n._id} to={`/news/${n.slug}`} className="trending-item-card">
+                <img src={getImageUrl(n)} alt={n.title} />
+                <div className="trending-item-content">
+                  <div className="trending-cat">{n.category?.name}</div>
+                  <h3>{n.title}</h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+
+
+
+
 
 
 
@@ -135,7 +149,7 @@ useEffect(() => {
     <h3>Editor’s Picks</h3>
 
     <div className="pick-row">
-      {(homepage.editorPicks || latestNews.slice(0,30)).map((n, i) => (
+      {(homepage.editorPicks || latestNews.slice(0,8)).map((n, i) => (
         <Link to={`/news/${n.slug}`} key={i} className="pick-card">
           <img src={getImageUrl(n)} />
           <p>{n.title}</p>
@@ -245,62 +259,83 @@ useEffect(() => {
 
 
 
-<section className="news-snapshot reveal">
+<section className="premium-stats-section reveal">
 
-  <div className="snapshot-item">
-    <div className="snapshot-icon">📰</div>
-    <div>
-      <strong>{latestNews.length}+</strong>
-      <span>Stories Published Today</span>
+  <h2 className="stats-title">The Trends Snapshot</h2>
+
+  <div className="stats-grid">
+    <div className="stat-card">
+      <div className="stat-icon">📰</div>
+      <div>
+        <strong>{latestNews.length}+</strong>
+        <span>Stories Today</span>
+      </div>
     </div>
-  </div>
 
-  <div className="snapshot-item">
-    <div className="snapshot-icon">📂</div>
-    <div>
-      <strong>{homepage.categorySections.length}</strong>
-      <span>Active Categories</span>
+    <div className="stat-card">
+      <div className="stat-icon">🎯</div>
+      <div>
+        <strong>{homepage.categorySections?.length || 0}</strong>
+        <span>Categories</span>
+      </div>
     </div>
-  </div>
 
-  <div className="snapshot-item live">
-    <div className="snapshot-icon pulse">🔴</div>
-    <div>
-      <strong>24×7</strong>
-      <span>Live News Updates</span>
+    <div className="stat-card live">
+      <div className="stat-icon"><span className="live-pulse">🔴</span></div>
+      <div>
+        <strong>24/7</strong>
+        <span>Live Coverage</span>
+      </div>
+    </div>
+
+    <div className="stat-card">
+      <div className="stat-icon">⚡</div>
+      <div>
+        <strong>Real-time</strong>
+        <span>Updates</span>
+      </div>
     </div>
   </div>
 
 </section>
 
+      {/* LATEST NEWS */}
+      <section className="premium-latest-news reveal">
+        <div className="latest-header">
+          <h2>📋 Latest News</h2>
+          <p className="section-subtitle">Freshly published stories</p>
+        </div>
 
-
-
-      {/* ================= LATEST ================= */}
-      <section className="latest reveal">
-        <h2>Latest News</h2>
-        <div className="latest-grid">
-          {latestNews.map(n => (
-            <Link to={`/news/${n.slug}`} key={n._id} className="latest-card">
-              <img src={getImageUrl(n)} />
-              <div>
+        <div className="latest-news-grid">
+          {latestNews.map((n, i) => (
+            <Link to={`/news/${n.slug}`} key={n._id} className="latest-news-card">
+              <div className="latest-card-image">
+                <img src={getImageUrl(n)} alt={n.title} />
+                <span className="latest-card-index">{i + 1}</span>
+              </div>
+              <div className="latest-card-content">
                 <h4>{n.title}</h4>
-                <span>{n.category?.name}</span>
+                <div className="latest-card-meta">
+                  <span className="cat-badge">{n.category?.name}</span>
+                  <span className="time-badge">{readingTime(n.content)} min</span>
+                </div>
               </div>
             </Link>
           ))}
         </div>
       </section>
-<button
-  className="to-top"
-  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
->
-  ↑
-</button>
 
-<Footer />
+      <button
+        className="premium-scroll-top"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        title="Back to top"
+      >
+        <span>↑</span>
+      </button>
 
-    </>
+      <Footer />
+
+    </div>
   );
 };
 
