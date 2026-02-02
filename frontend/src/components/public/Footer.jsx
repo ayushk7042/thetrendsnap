@@ -32,10 +32,10 @@ const Footer = () => {
           <h4>Categories</h4>
           <ul>
             <li><Link to="/category/technology">Technology</Link></li>
-            <li><Link to="/category/business">Business</Link></li>
-            <li><Link to="/category/entertainment">Entertainment</Link></li>
-            <li><Link to="/category/sports">Sports</Link></li>
-            <li><Link to="/category/health">Health</Link></li>
+            <li><Link to="/category/business">Fashion</Link></li>
+            <li><Link to="/category/entertainment">Celebrity-Beauty</Link></li>
+            <li><Link to="/category/sports">Best-Dressed</Link></li>
+            <li><Link to="/category/health">wedding-planning-and-advice</Link></li>
           </ul>
         </div>
 

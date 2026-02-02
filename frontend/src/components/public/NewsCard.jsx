@@ -38,7 +38,7 @@ const getImageUrl = (featuredImage) => {
     if (featuredImage.startsWith("http")) return featuredImage;
 
     // 👇 yahan apna uploads base path daalo
-    return `http://localhost:5000/uploads/${featuredImage}`;
+    return `${import.meta.env.VITE_API_URL}/uploads/${featuredImage}`;
   }
 
   return null;

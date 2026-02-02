@@ -13,9 +13,9 @@ const getImageUrl = (featuredImage) => {
 
   if (typeof featuredImage === "object" && featuredImage.url) return featuredImage.url;
   if (typeof featuredImage === "object" && featuredImage.path) return featuredImage.path;
-  if (typeof featuredImage === "string") {
+    if (typeof featuredImage === "string") {
     if (featuredImage.startsWith("http")) return featuredImage;
-    return `http://localhost:5000/uploads/${featuredImage}`;
+    return `${import.meta.env.VITE_API_URL}/uploads/${featuredImage}`;
   }
   return "/placeholder-news.jpg";
 };

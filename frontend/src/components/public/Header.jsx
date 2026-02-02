@@ -10,7 +10,7 @@ const getImageUrl = (news) => {
   if (!news?.featuredImage?.url) return "/no-image.jpg";
   if (news.featuredImage.url.startsWith("http"))
     return news.featuredImage.url;
-  return `http://localhost:5000${news.featuredImage.url}`;
+  return `${import.meta.env.VITE_API_URL}${news.featuredImage.url}`;
 };
 
 
